@@ -12,13 +12,12 @@
         }
 
         nav{
-            width : 1200px;
+            width : 100%;
             height : 50px;
             background-color: #5f4242;
             font-size : 0px;
             text-align: center;
             margin : 0 auto;
-            margin-top: 50px;
         }
 
         nav ul{
@@ -60,18 +59,13 @@
         .sub_menu{
             display: none;
         }
-        section{
-            width : 1200px;
-            height : 500px;
-            background-color: green;
-            margin : 0 auto;
-        }
+        
     </style>
 
     <script>
         $(function(){
             //main_menu에 마우스가 올라가면 각각의 sub_menu를 보여줌
-            $(".main_menu").mouseover(function(){
+            $(".main_menu").mouseenter(function(){
                 $(this).children(".sub_menu").stop().slideDown(500);
             });
 

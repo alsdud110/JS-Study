@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin : 0;
+            padding: 0;
+        }
+
+        .container{
+            text-align : center;
+            margin-top : 100px;
+        }
+
+        table{
+            display : inline-block;
+        }
+        table, tr, td{
+            border : 1px solid black;
+        }
+
+        .btn_register{
+            float : right;
+            background-color: aquamarine;
+        }
+
+        .btn_register:hover{
+            background-color: blueviolet;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <div class = "container">
+    <table>
+        <th>
+            <tr>
+                <td>아이디</td>
+                <td><input type = "text"></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input type = "password"></td>
+            </tr>
+            <tr>
+                <td colspan = "2"><input type = "submit" class = "btn_register"></td>
+            </tr>
+        </th>
+    </table>
+</div>
+</body>
+</html>
