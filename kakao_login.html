@@ -5,8 +5,81 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>카카오 로그인</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src = "/resources/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        //카카오 라이브러리 초기화
+        Kakao.init('857b5df6e7f70c89f009c9c82707d52b');
+
+        //카카오 초기화 여부
+        console.log(Kakao.isInitialized());
+        $("#unlink").click(unlinkApp);
+        $("#logout").click(kakaoLogout);
+        
+    });
+
+        //프로필 가져오는 함수
+        function getProfile(){
+            Kakao.API.request({
+        url: '/v2/user/me',
+        success: function(res) {
+            console.log(res);
+            $("#result").html(res.kakao_account.email + " " + res.properties.nickname);
+        },
+        fail: function(error) {
+          alert(
+            'login success, but failed to request user information: ' +
+              JSON.stringify(error)
+          )
+        },
+      })
+        }
+        function kakaoLogout() {
+    if (!Kakao.Auth.getAccessToken()) {
+      alert('Not logged in.')
+      return
+    }
+    Kakao.Auth.logout(function() {
+      alert('logout ok\naccess token -> ' + Kakao.Auth.getAccessToken())
+    })
+  }
+        function unlinkApp() {
+            Kakao.API.request({
+            url: '/v1/user/unlink',
+              success: function(res) {
+                alert('success: ' + JSON.stringify(res))
+            },
+              fail: function(err) {
+                alert('fail: ' + JSON.stringify(err))
+             },
+             })
+         }
+
+        function loginWithKakao() {
+            Kakao.Auth.login({
+                success: function(authObj) {
+                    console.log(JSON.stringify(authObj));
+                    getProfile();
+                },
+                fail: function(err) {
+                    console.log(JSON.stringify(err));
+                },
+            })
+        }
+        </script>
+
+        <a id="custom-login-btn" href="javascript:loginWithKakao()">
+            <img
+              src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
+              width="222"
+            />
+          </a>
+          <a href = "#" id = "logout">로그아웃</a>
+          <a href = "#" id = "unlink">회원탈퇴</a>
+
+          <div id = "result"></div>
 </head>
 <body>
-    
 </body>
 </html>
