@@ -62,37 +62,37 @@
 			border: none;
 		}
 	</style>
-    <script src='/resources/js/jquery-3.6.0.min.js'></script>
+    <script src='/resource/js/jquery-3.6.0.min.js'></script>
     <script>
         $(function(){
             $("#btn_translate").click(function(){
                 var param = $("#frm").serialize();
-                // alert(param);
-                
+                //alert(param);
                 $.ajax({
                     url : "http://nam2626.dothome.co.kr/backup/papago.php",
                     data : param,
-                    type : 'GET',
-                    success : function(result){
-                        console.log(result);
-                        var result = result.split("<br>")[1];
+                    type : 'get',
+                    success : function(data){
+                        console.log(data);
+                        var result = data.split("<br>")[1];
                         result = JSON.parse(result);
-                        $("#result").html(result.message.result.translatedText);
+                        $("#result").val(result.message.result.translatedText);
                     },
-                    error : function(xhr, status, error){
-                        console.log("code : " + xhr.status + " , message : " + xhr.responseText + ", error : " + error);
+                    error: function(xhr,status,error){
+                        console.log("code : " + xhr.status + 
+                        " , message : "+xhr.responseText + ", error : "+error );
                     }
-                }); 
+
+                });
                 return false;
             });
         });
-
     </script>
 </head>
 <body>
     <h1>파파고 번역 페이지</h1>
 	<section>
-        <form id = "frm">
+        <form id="frm">
 		<article>
 			<select name="source" id="source">
 				<option value="ko">한국어</option>
@@ -116,7 +116,7 @@
 			<textarea id="result"></textarea>
 		</article>
 		<button id="btn_translate">>></button>
-    </form>
+        </form>
 	</section>
 </body>
 </html>
